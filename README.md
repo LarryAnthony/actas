@@ -1,1 +1,1 @@
-## Aplicación para generar acta de reuniones
+## Aplicación para generar acta de reuniones:
