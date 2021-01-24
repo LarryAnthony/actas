@@ -6,7 +6,8 @@ const pool = new Pool({
     host: process.env.DB,
     database: 'actas',
     password: process.env.PASSWORD,
-    port: 5432
+    port: 5432,
+    ssl: { rejectUnauthorized: false }
 });
 
 const poolEnv = new Pool({
@@ -14,7 +15,8 @@ const poolEnv = new Pool({
     host: 'localhost',
     database: 'acta',
     password: 12345678,
-    port: 5432
+    port: 5432,
+    ssl: { rejectUnauthorized: false }
 });
 module.exports = {
     pool,
