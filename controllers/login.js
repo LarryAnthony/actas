@@ -38,7 +38,6 @@ const login_env = async (req, res) => {
 
     const { correo, password } = req.body;
     try {
-        console.log('pooling', poolEnv, pool)
         const usuario = (await poolEnv.query({ text: 'SELECT * FROM public.usuario WHERE correo= $1', values: [correo] })).rows;
         if (usuario.length === 0) {
             return res.status(400).json({
