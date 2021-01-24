@@ -1,4 +1,4 @@
-const { pool } = require('../database/config');
+const { pool, poolEnv } = require('../database/config');
 const { validarToken } = require('../middlewares/validar-jwt')
 const bcrypt = require('bcrypt');
 
@@ -72,6 +72,7 @@ const crearUsuario_env = async (req, res) => {
     const hash = bcrypt.hashSync(password, 10);
     try {
         const usuario = (await poolEnv.query({ text: 'SELECT * FROM public.usuario WHERE correo=$1 ;', values: [correo] })).rows;
+        console.log(usuario)
         if (usuario.length > 0) {
             return res.status(400).json({
                 ok: false,
