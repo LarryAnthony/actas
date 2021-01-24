@@ -15,8 +15,7 @@ const poolEnv = new Pool({
     host: 'localhost',
     database: 'acta',
     password: 12345678,
-    port: 5432,
-    ssl: { rejectUnauthorized: false }
+    port: 5432
 });
 module.exports = {
     pool,
