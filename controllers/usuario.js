@@ -61,7 +61,8 @@ const crearUsuario = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             ok: false,
-            msg: 'Problemas de conexión'
+            msg: 'Problemas de conexión',
+            error
         });
     }
 }
