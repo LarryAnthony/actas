@@ -17,7 +17,7 @@ app.use('/', require('./routes/acta'));
 app.use('/', require('./routes/usuario-proyecto'));
 app.use('/', require('./routes/acuerdo'));
 
-//Lo útlimo
+//Lo útlimo, en caso recargue una ruta que no corresponda, te manda al index
 app.use('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'public/index.html'))
 });

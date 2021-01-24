@@ -46,7 +46,7 @@ const crearUsuario = async (req, res) => {
     const estado = true;
     const hash = bcrypt.hashSync(password, 10);
     try {
-        const usuario = (await pool.query({ text: 'SELECT * FROM public.usuario WHERE nombre=$1 AND apellido=$2 ;', values: [nombre, apellido] })).rows;
+        const usuario = (await pool.query({ text: 'SELECT * FROM public.usuario WHERE correo=$1 ;', values: [correo] })).rows;
         if (usuario.length > 0) {
             return res.status(400).json({
                 ok: false,
