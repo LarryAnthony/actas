@@ -66,6 +66,31 @@ const crearUsuario = async (req, res) => {
         });
     }
 }
+const crearUsuario_env = async (req, res) => {
+    const { nombre, apellido, correo, password, fecha_nacimiento, id_area } = req.body;
+    const estado = true;
+    const hash = bcrypt.hashSync(password, 10);
+    try {
+        const usuario = (await poolEnv.query({ text: 'SELECT * FROM public.usuario WHERE correo=$1 ;', values: [correo] })).rows;
+        if (usuario.length > 0) {
+            return res.status(400).json({
+                ok: false,
+                msg: 'Usuario ya existe'
+            })
+        }
+        await poolEnv.query({ text: 'INSERT INTO public.usuario(nombre, apellido, fecha_nacimiento, id_area, correo, password, estado) VALUES ($1, $2, $3, $4, $5, $6, $7);', values: [nombre, apellido, fecha_nacimiento, id_area, correo, hash, estado] });
+        res.status(200).json({
+            ok: true,
+            msg: `Usuario ${nombre} ${apellido} creado`
+        });
+    } catch (error) {
+        res.status(500).json({
+            ok: false,
+            msg: 'Problemas de conexión',
+            error
+        });
+    }
+}
 
 const actualizarUsuario = async (req, res) => {
     const id_usuario = req.params.id;
@@ -137,5 +162,6 @@ module.exports = {
     crearUsuario,
     actualizarUsuario,
     actualizarEstadoUsuario,
-    validarTokenUsuario
+    validarTokenUsuario,
+    crearUsuario_env
 }
