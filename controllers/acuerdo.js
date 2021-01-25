@@ -3,6 +3,12 @@ const { pool } = require('../database/config');
 const obtenerAcuerdosPorProyecto = async (req, res) => {
     const id_proyecto = req.params.id;
     try {
+        if (id_proyecto.length > 10) {
+            return res.status(400).json({
+                ok: false,
+                msg: `Seleccione un proyecto`
+            });
+        }
         const acuerdo = (await pool.query({ text: 'SELECT * FROM public.proyecto WHERE id_proyecto = $1;', values: [id_proyecto] }));
         if (!acuerdo) {
             return res.status(400).json({

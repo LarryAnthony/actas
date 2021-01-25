@@ -28,7 +28,6 @@ const obtenerProyectosPorIdUsuario = async (req, res) => {
 
     try {
         const proyectos = (await pool.query({ text: 'SELECT a.id_usuario_proyecto, a.id_usuario, a.id_proyecto, b.nombre, a.estado FROM public.usuario_proyecto as a, public.proyecto as b WHERE a.id_usuario=$1 AND a.id_proyecto=b.id_proyecto;', values: [id_usuario] })).rows;
-        console.log('Hi')
         res.status(200).json({
             ok: true,
             data: proyectos
