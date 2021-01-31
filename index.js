@@ -16,6 +16,7 @@ app.use('/', require('./routes/login'));
 app.use('/', require('./routes/acta'));
 app.use('/', require('./routes/usuario-proyecto'));
 app.use('/', require('./routes/acuerdo'));
+app.use('/', require('./routes/mail'));
 
 //Lo útlimo, en caso recargue una ruta que no corresponda, te manda al index
 app.use('*', (req, res) => {

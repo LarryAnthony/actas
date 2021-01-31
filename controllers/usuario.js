@@ -98,7 +98,6 @@ const actualizarUsuario = async (req, res) => {
     const hash = bcrypt.hashSync(password, 10);
     try {
         const usuario = (await pool.query({ text: 'SELECT * FROM public.usuario WHERE id_usuario=$1;', values: [id_usuario] })).rows;
-        console.log(usuario)
         if (usuario.length === 0) {
             return res.status(400).json({
                 ok: false,
@@ -149,7 +148,6 @@ const actualizarEstadoUsuario = async (req, res) => {
 const validarTokenUsuario = (req, res) => {
     const token = req.body.token;
     if (token != null && token != '') {
-        console.log(token)
         res.status(200).json(validarToken(token));
     } else {
         res.status(400).json(false);

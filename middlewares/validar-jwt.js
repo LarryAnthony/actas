@@ -30,7 +30,6 @@ const validarToken = (token) => {
     try {
         const payload = jwt.decode(token, process.env.JWT_SECRET);
         if (payload.exp >= moment().unix()) {
-            console.log(payload)
             return {
                 ok: true,
                 id_usuario: payload.id_usuario,
@@ -41,7 +40,6 @@ const validarToken = (token) => {
         }
         return { codigo: 0, roles: [] };
     } catch (e) {
-        console.log(e);
         return { codigo: 0, roles: [] };
     }
 }

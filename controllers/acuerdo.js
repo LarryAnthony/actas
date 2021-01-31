@@ -16,7 +16,36 @@ const obtenerAcuerdosPorProyecto = async (req, res) => {
                 msg: 'Proyecto no encontrado'
             });
         }
-        const acuerdosPorProyecto = (await pool.query({ text: 'SELECT a.id_acuerdo, a.detalle, a.fecha_limite, a.estado, a.id_proyecto, a.id_usuario, b.nombre, a.fecha_creacion FROM public.acuerdo as a, public.usuario as b WHERE a.id_proyecto = $1 AND a.id_usuario=b.id_usuario;', values: [id_proyecto] })).rows;
+        const acuerdosPorProyecto = (await pool.query({ text: 'SELECT a.id_acuerdo, a.detalle, a.fecha_limite, a.estado, a.id_proyecto, a.id_usuario, b.nombre, a.fecha_creacion FROM public.acuerdo as a, public.usuario as b WHERE a.id_proyecto = $1 AND a.id_usuario=b.id_usuario ORDER BY a.fecha_limite ASC;', values: [id_proyecto] })).rows;
+        res.status(200).json({
+            ok: true,
+            data: acuerdosPorProyecto
+        });
+    } catch (error) {
+        res.status(500).json({
+            ok: false,
+            msg: 'Problemas de conexión'
+        });
+    }
+}
+
+const obtenerAcuerdosRestantePorProyecto = async (req, res) => {
+    const id_proyecto = req.params.id;
+    try {
+        if (id_proyecto.length > 10) {
+            return res.status(400).json({
+                ok: false,
+                msg: `Seleccione un proyecto`
+            });
+        }
+        const acuerdo = (await pool.query({ text: 'SELECT * FROM public.proyecto WHERE id_proyecto = $1;', values: [id_proyecto] }));
+        if (!acuerdo) {
+            return res.status(400).json({
+                ok: false,
+                msg: 'Proyecto no encontrado'
+            });
+        }
+        const acuerdosPorProyecto = (await pool.query({ text: "SELECT a.id_acuerdo, a.detalle, a.fecha_limite, a.estado, a.id_proyecto, a.id_usuario, b.nombre, a.fecha_creacion FROM public.acuerdo as a, public.usuario as b WHERE a.id_proyecto = $1 AND a.id_usuario=b.id_usuario AND a.estado!='Realizado' ORDER BY a.fecha_limite ASC;", values: [id_proyecto] })).rows;
         res.status(200).json({
             ok: true,
             data: acuerdosPorProyecto
@@ -81,5 +110,6 @@ const actualizarAcuerdo = async (req, res) => {
 module.exports = {
     crearAcuerdo,
     actualizarAcuerdo,
-    obtenerAcuerdosPorProyecto
+    obtenerAcuerdosPorProyecto,
+    obtenerAcuerdosRestantePorProyecto
 }

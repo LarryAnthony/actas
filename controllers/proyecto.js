@@ -98,7 +98,6 @@ const crearProyecto = async (req, res) => {
 const actualizarProyecto = async (req, res) => {
     const { nombre, fecha_inicio, estado } = req.body;
     const id_proyecto = req.params.id_proyecto;
-    console.log(id_proyecto)
     try {
         if (nombre.length === 0 || fecha_inicio.length === 0 || estado.length === 0) {
             return res.status(400).json({
@@ -108,7 +107,6 @@ const actualizarProyecto = async (req, res) => {
         }
 
         const proyecto = (await pool.query({ text: 'SELECT id_proyecto, nombre, fecha_inicio, estado, id_usuario FROM public.proyecto WHERE id_proyecto=$1;', values: [id_proyecto] })).rows;
-        console.log(proyecto)
         if (proyecto.length === 0) {
             return res.status(400).json({
                 ok: false,
