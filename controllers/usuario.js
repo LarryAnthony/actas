@@ -145,10 +145,10 @@ const actualizarEstadoUsuario = async (req, res) => {
         });
     }
 }
-const validarTokenUsuario = (req, res) => {
+const validarTokenUsuario = async (req, res) => {
     const token = req.body.token;
     if (token != null && token != '') {
-        res.status(200).json(validarToken(token));
+        res.status(200).json(await validarToken(token));
     } else {
         res.status(400).json(false);
     }

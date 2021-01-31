@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const moment = require('moment');
+const { generarJWT } = require('../helpers/jwt');
 require('dotenv').config();
 
 const validarJWT = (req, res, next) => {
@@ -26,21 +27,23 @@ const validarJWT = (req, res, next) => {
     next();
 }
 
-const validarToken = (token) => {
+const validarToken = async (token) => {
     try {
         const payload = jwt.decode(token, process.env.JWT_SECRET);
         if (payload.exp >= moment().unix()) {
+            const newToken = await generarJWT(payload.id_usuario, payload.nombre, payload.apellido, payload.correo);
             return {
                 ok: true,
                 id_usuario: payload.id_usuario,
                 nombre: payload.nombre,
                 apellido: payload.apellido,
-                correo: payload.correo
+                correo: payload.correo,
+                token: newToken
             };
         }
-        return { codigo: 0, roles: [] };
+        return false;
     } catch (e) {
-        return { codigo: 0, roles: [] };
+        return false;
     }
 }
 
