@@ -28,7 +28,8 @@ const obtenerUsuarioPorId = async (req, res) => {
 
 const obtenerUsuarios = async (req, res) => {
     try {
-        const usuarios = (await pool.query({ text: 'SELECT * FROM public.usuario;' })).rows;
+        // const usuarios = (await pool.query({ text: 'SELECT * FROM public.usuario;' })).rows;
+        const usuarios = (await pool.query({ text: "SELECT id_usuario, nombre, id_area, correo, apellido, estado, fecha_nacimiento, concat(nombre,' ',apellido,' - ',correo) as nombre_apellido FROM public.usuario;" })).rows;
         res.status(200).json({
             ok: true,
             data: usuarios
