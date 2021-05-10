@@ -24,8 +24,13 @@ app.use('*', (req, res) => {
 });
 
 const PORT = process.env.PORT || 3001;
-app.listen(PORT);
+app.listen(PORT, () => {
+	console.log('Conectando al servidor ' + process.env.PORT);
+	if (process.send) {
+		process.send('ready');
+	}
+});
 
-console.log('Conectando al servidor ' + process.env.PORT);
+
 
 
