@@ -24,8 +24,8 @@ app.use('*', (req, res) => {
 	res.send('HOla')
 });
 
-
-app.listen(process.env.PORT || 3000);
+const PORT = process.env.PORT || 3000
+app.listen(PORT);
 
 console.log('Conectando al servidor ' + process.env.PORT);
 
