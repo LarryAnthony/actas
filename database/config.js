@@ -12,9 +12,9 @@ const { Pool, Client } = require('pg');
 const pool = new Pool({
 	user: process.env.USER,
 	host: process.env.DB,
-	database: 'pruebas',
+	database: 'acta',
 	password: process.env.PASSWORD,
-	port: 24362,
+	port: 5432,
 	ssl: { rejectUnauthorized: false }
 });
 
