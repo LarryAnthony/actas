@@ -9,7 +9,7 @@ const { Pool, Client } = require('pg');
 //     port: 5432,
 //     ssl: { rejectUnauthorized: false }
 // });
-const poolEnv = new Pool({
+const pool = new Pool({
 	user: process.env.USER,
 	host: process.env.DB,
 	database: 'pruebas',
@@ -18,7 +18,7 @@ const poolEnv = new Pool({
 	ssl: { rejectUnauthorized: false }
 });
 
-const pool = new Pool({
+const poolEnv = new Pool({
 	user: 'postgres',
 	host: 'localhost',
 	database: 'acta',
