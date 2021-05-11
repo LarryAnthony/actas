@@ -23,7 +23,7 @@ app.use('*', (req, res) => {
 	res.sendFile(path.resolve(__dirname, 'public/index.html'));
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
 	console.log('Conectando al servidor ' + process.env.PORT);
 	if (process.send) {
