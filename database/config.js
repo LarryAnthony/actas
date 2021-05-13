@@ -10,10 +10,10 @@ const { Pool, Client } = require('pg');
 //     ssl: { rejectUnauthorized: false }
 // });
 const pool = new Pool({
-	user: process.env.USER,
-	host: process.env.DB,
+	user: 'postgres',
+	host: '143.198.118.248',
 	database: 'acta',
-	password: process.env.PASSWORD,
+	password: 'chili123',
 	port: 5432,
 	ssl: { rejectUnauthorized: false }
 });
