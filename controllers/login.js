@@ -25,10 +25,9 @@ const login = async (req, res) => {
 			token,
 		});
 	} catch (error) {
-		console.log(error.error.msg)
 		res.status(500).json({
 			ok: false,
-			msg: 'Problemas al conectarse con BD 1',
+			msg: 'Problemas al conectarse con BD 1 login',
 			error
 		});
 	}
@@ -60,7 +59,7 @@ const login_env = async (req, res) => {
 	} catch (error) {
 		res.status(500).json({
 			ok: false,
-			msg: 'Problemas al conectarse con BD',
+			msg: 'Problemas al conectarse con BD dev',
 			error
 		});
 	}
