@@ -9,12 +9,12 @@ const { Pool, Client } = require('pg');
 //     port: 5432,
 //     ssl: { rejectUnauthorized: false }
 // });
-console.log(process.env.USER, process.env.DB, process.env.PASSWORD);
+console.log(process.env.PG_USER, process.env.PG_DB, process.env.PG_PASSWORD);
 const pool = new Pool({
-	user: process.env.USER,
-	host: process.env.DB,
+	user: process.env.PG_USER,
+	host: process.env.PG_DB,
 	database: 'acta',
-	password: process.env.PASSWORD,
+	password: process.env.PG_PASSWORD,
 	port: 5432,
 	ssl: { rejectUnauthorized: false }
 });
