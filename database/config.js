@@ -9,6 +9,7 @@ const { Pool, Client } = require('pg');
 //     port: 5432,
 //     ssl: { rejectUnauthorized: false }
 // });
+console.log(process.env.USER, process.env.DB, process.env.PASSWORD);
 const pool = new Pool({
 	user: process.env.USER,
 	host: process.env.DB,
