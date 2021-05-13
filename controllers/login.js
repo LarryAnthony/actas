@@ -28,7 +28,7 @@ const login = async (req, res) => {
 		console.log(error.error.msg)
 		res.status(500).json({
 			ok: false,
-			msg: 'Problemas al conectarse con BD',
+			msg: 'Problemas al conectarse con BD 1',
 			error
 		});
 	}
