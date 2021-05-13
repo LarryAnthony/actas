@@ -25,6 +25,7 @@ const login = async (req, res) => {
 			token,
 		});
 	} catch (error) {
+		console.log(error.error.msg)
 		res.status(500).json({
 			ok: false,
 			msg: 'Problemas al conectarse con BD',
