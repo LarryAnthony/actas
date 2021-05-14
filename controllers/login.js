@@ -27,7 +27,7 @@ const login = async (req, res) => {
 	} catch (error) {
 		res.status(500).json({
 			ok: false,
-			msg: 'Problemas al conectarse con BD 1 login',
+			msg: 'Problemas al conectarse con BD 2 login',
 			error
 		});
 	}

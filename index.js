@@ -9,14 +9,15 @@ app.use(express.json());
 
 app.use(express.static('public'));
 
-app.use('/', require('./routes/area'));
-app.use('/', require('./routes/usuario'));
-app.use('/', require('./routes/proyecto'));
-app.use('/', require('./routes/login'));
-app.use('/', require('./routes/acta'));
-app.use('/', require('./routes/usuario-proyecto'));
-app.use('/', require('./routes/acuerdo'));
-app.use('/', require('./routes/mail'));
+
+app.use('/api', require('./routes/area'));
+app.use('/api', require('./routes/usuario'));
+app.use('/api', require('./routes/proyecto'));
+app.use('/api', require('./routes/login'));
+app.use('/api', require('./routes/acta'));
+app.use('/api', require('./routes/usuario-proyecto'));
+app.use('/api', require('./routes/acuerdo'));
+app.use('/api', require('./routes/mail'));
 
 //Lo útlimo, en caso recargue una ruta que no corresponda, te manda al index
 app.use('*', (req, res) => {
